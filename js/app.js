@@ -1,3 +1,22 @@
+//when a card is clicked, change class 'card' to 'card open'
+const cards = document.querySelectorAll('.card');
+cards.forEach(function(card) {
+  card.addEventListener('click', function(event) {
+    card.className = "card open show";
+  });
+})
+
+
+
+//when card is matched, change to 'card match', else cahnge to 'card'
+// if (matchList[0] === matchList[1]) {
+//   xxx.className = "card match";
+// } else {
+//   xxx.className = "card";
+// }
+
+
+
 /*
  * Create a list that holds all of your cards
  */
