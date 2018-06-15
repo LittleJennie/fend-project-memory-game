@@ -1,10 +1,42 @@
+//create a list that holds all my clicked cards
+var clickedCards = [];
+var openedCards = document.querySelectorAll('card open show');
+
 //when a card is clicked, change class 'card' to 'card open'
 const cards = document.querySelectorAll('.card');
 cards.forEach(function(card) {
   card.addEventListener('click', function(event) {
+    if (card.className === 'card match' || card.className === 'card open show') {
+      return;
+    }
     card.className = "card open show";
-  });
+    if (clickedCards.length === 0) {
+      clickedCards.push(card);
+      console.log(clickedCards);
+    } else {
+      let previousCard = clickedCards.pop();
+      if (previousCard.firstElementChild.className === card.firstElementChild.className) {
+          previousCard.className = "card match";
+          card.className = "card match";
+      } else {
+          previousCard.className = "card";
+          card.className = "card";
+      }
+    }
+  })
+
 })
+
+
+//limit the list to 2 element and evaluate the matching status of the two
+// if (clickedCards.length === 2) {
+//   if (clickedCards[0] == clickedCards[1]) {
+//     document.querySelectorAll('card open show').className = "card match";
+//   } else {
+//     document.querySelectorAll('card open show').className = "card";
+//   }
+// }
+
 
 
 
