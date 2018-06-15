@@ -19,7 +19,6 @@ let addOpenedCard = function(card) {
   clickedCards.push(card);
 }
 
-
 //Timeout function when cards are matched
 let cardMatchTimeout = function(previousCard, card) {
   setTimeout(function() {
@@ -36,6 +35,8 @@ let cardNotMatchTimeout = function(previousCard, card) {
   }, 700);
 }
 
+//Move counter variable
+let moveCounter = 0;
 
 //when a card is clicked, change class 'card' to 'card open'
 const cards = document.querySelectorAll('.card');
@@ -46,8 +47,15 @@ cards.forEach(function(card) {
     }
     card.className = "card open show";
     evaluateMatch(card);
+    moveCounter ++;
+    displayMoveCounter(moveCounter);
   });
 })
+
+//display moveCounter
+let displayMoveCounter = function (moveCounter) {
+  document.querySelector('.moves').innerHTML = moveCounter;
+}
 
 /*
  * Display the cards on the page
