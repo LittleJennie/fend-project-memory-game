@@ -4,7 +4,7 @@ let clickedCards = [];
 //Logic test on evaluating card matching status
 let evaluateMatch = function(card) {
   if (clickedCards.length === 0) {
-    clickedCards.push(card);
+    addOpenedCard(card);
   } else {
     let previousCard = clickedCards.pop();
     if (previousCard.firstElementChild.className === card.firstElementChild.className) {
@@ -14,6 +14,11 @@ let evaluateMatch = function(card) {
     }
   }
 }
+//Add a card to a opened card list
+let addOpenedCard = function(card) {
+  clickedCards.push(card);
+}
+
 
 //Timeout function when cards are matched
 let cardMatchTimeout = function(previousCard, card) {
