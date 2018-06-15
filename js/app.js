@@ -1,6 +1,36 @@
 //create a list that holds all my clicked cards
-var clickedCards = [];
-var openedCards = document.querySelectorAll('card open show');
+let clickedCards = [];
+
+//Logic test on evaluating card matching status
+let evaluateMatch = function(card) {
+  if (clickedCards.length === 0) {
+    clickedCards.push(card);
+  } else {
+    let previousCard = clickedCards.pop();
+    if (previousCard.firstElementChild.className === card.firstElementChild.className) {
+        cardMatchTimeout(previousCard, card);
+    } else {
+        cardNotMatchTimeout(previousCard, card);
+    }
+  }
+}
+
+//Timeout function when cards are matched
+let cardMatchTimeout = function(previousCard, card) {
+  setTimeout(function() {
+    previousCard.className = "card match";
+    card.className = "card match";
+  }, 700);
+}
+
+//Timeout function when cards are not matched
+let cardNotMatchTimeout = function(previousCard, card) {
+  setTimeout(function() {
+    previousCard.className = "card";
+    card.className = "card";
+  }, 700);
+}
+
 
 //when a card is clicked, change class 'card' to 'card open'
 const cards = document.querySelectorAll('.card');
@@ -10,53 +40,9 @@ cards.forEach(function(card) {
       return;
     }
     card.className = "card open show";
-    if (clickedCards.length === 0) {
-      clickedCards.push(card);
-      console.log(clickedCards);
-    } else {
-      let previousCard = clickedCards.pop();
-      if (previousCard.firstElementChild.className === card.firstElementChild.className) {
-          setTimeout(function() {
-            previousCard.className = "card match";
-            card.className = "card match";
-          }, 700)
-      } else {
-        setTimeout(function() {
-          previousCard.className = "card";
-          card.className = "card";
-        }, 700)
-      }
-    }
-  })
-
+    evaluateMatch(card);
+  });
 })
-
-
-//limit the list to 2 element and evaluate the matching status of the two
-// if (clickedCards.length === 2) {
-//   if (clickedCards[0] == clickedCards[1]) {
-//     document.querySelectorAll('card open show').className = "card match";
-//   } else {
-//     document.querySelectorAll('card open show').className = "card";
-//   }
-// }
-
-
-
-
-//when card is matched, change to 'card match', else cahnge to 'card'
-// if (matchList[0] === matchList[1]) {
-//   xxx.className = "card match";
-// } else {
-//   xxx.className = "card";
-// }
-
-
-
-/*
- * Create a list that holds all of your cards
- */
-
 
 /*
  * Display the cards on the page
