@@ -16,11 +16,15 @@ cards.forEach(function(card) {
     } else {
       let previousCard = clickedCards.pop();
       if (previousCard.firstElementChild.className === card.firstElementChild.className) {
-          previousCard.className = "card match";
-          card.className = "card match";
+          setTimeout(function() {
+            previousCard.className = "card match";
+            card.className = "card match";
+          }, 700)
       } else {
+        setTimeout(function() {
           previousCard.className = "card";
           card.className = "card";
+        }, 700)
       }
     }
   })
