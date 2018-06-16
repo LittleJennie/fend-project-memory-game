@@ -49,12 +49,24 @@ cards.forEach(function(card) {
     evaluateMatch(card);
     moveCounter ++;
     displayMoveCounter(moveCounter);
+    moveCounterStar(moveCounter);
   });
 })
 
 //display moveCounter
 let displayMoveCounter = function (moveCounter) {
   document.querySelector('.moves').innerHTML = moveCounter;
+}
+
+//evaluate move stars
+let moveCounterStar = function (moveCounter) {
+  if (moveCounter >= 16) {
+    document.getElementById('three-star').setAttribute('style', 'display: none');
+    console.log('helo');
+  }
+  if (moveCounter >= 32) {
+    document.getElementById('two-star').setAttribute('style', 'display: none');
+  }
 }
 
 /*
