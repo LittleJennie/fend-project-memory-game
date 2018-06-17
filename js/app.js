@@ -19,11 +19,15 @@ let addOpenedCard = function(card) {
   clickedCards.push(card);
 }
 
+//Create matched counter
+let matchedCounter = 1;
+
 //Timeout function when cards are matched
 let cardMatchTimeout = function(previousCard, card) {
   setTimeout(function() {
     previousCard.className = "card match";
     card.className = "card match";
+    matchedCounter ++;
   }, 700);
 }
 
@@ -50,6 +54,7 @@ cards.forEach(function(card) {
     moveCounter ++;
     displayMoveCounter(moveCounter);
     moveCounterStar(moveCounter);
+    showWinningPage(matchedCounter);
   });
 })
 
@@ -59,13 +64,35 @@ let displayMoveCounter = function (moveCounter) {
 }
 
 //evaluate move stars
+let starCounter = 0;
 let moveCounterStar = function (moveCounter) {
-  if (moveCounter >= 16) {
-    document.getElementById('three-star').setAttribute('style', 'display: none');
-    console.log('helo');
+  if (moveCounter <= 16) {
+    starCounter = 3;
   }
-  if (moveCounter >= 32) {
+  if (moveCounter > 16) {
+    document.getElementById('three-star').setAttribute('style', 'display: none');
+    starCounter = 2;
+  }
+  if (moveCounter > 32) {
     document.getElementById('two-star').setAttribute('style', 'display: none');
+    starCounter = 1;
+  }
+}
+
+
+//display winning page
+const container= document.querySelector('.container');
+const winning=document.querySelector('.winning');
+let showWinningPage = function(matchedCounter) {
+  if (matchedCounter === 8) {
+    //display winning message
+    let winning_stat = `
+      With ${moveCounter} and ${starCounter} Stars.
+
+      Woooooo!`;
+    container.setAttribute('style', 'display: none');
+    winning.setAttribute('style', 'display: block');
+    document.querySelector('.winning_stat').innerText = winning_stat;
   }
 }
 
